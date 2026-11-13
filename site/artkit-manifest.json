@@ -1,0 +1,1015 @@
+[
+ {
+  "id": "cn-tower",
+  "kind": "landmark",
+  "model": "cnTower",
+  "name": "CN Tower, Toronto",
+  "desc": "very tall slender concrete tower: three-legged tapering shaft, a round doughnut-shaped main pod two-thirds up (white ring, dark glass band, radome below), a smaller upper pod, long antenna mast with a red aircraft light on top",
+  "batch": 1,
+  "n": 1,
+  "layout": {
+   "W": 1536,
+   "H": 1024,
+   "cols": 4,
+   "rows": 1
+  }
+ },
+ {
+  "id": "rogers-centre",
+  "kind": "landmark",
+  "model": "rogers",
+  "name": "Rogers Centre (SkyDome), Toronto",
+  "desc": "big round stadium with a white segmented retractable dome roof, low concrete drum with dark glazing around the base",
+  "batch": 1,
+  "n": 2,
+  "layout": {
+   "W": 1024,
+   "H": 1024,
+   "cols": 2,
+   "rows": 2
+  }
+ },
+ {
+  "id": "city-hall",
+  "kind": "landmark",
+  "model": "cityHall",
+  "name": "Toronto City Hall (new)",
+  "desc": "two curved concrete towers of different heights facing each other like cupped hands, glass on the inner faces, blank ribbed concrete on the outer faces, a low white saucer-shaped council chamber between them, on a low podium",
+  "batch": 1,
+  "n": 3,
+  "layout": {
+   "W": 1024,
+   "H": 1024,
+   "cols": 2,
+   "rows": 2
+  }
+ },
+ {
+  "id": "old-city-hall",
+  "kind": "landmark",
+  "model": "oldCityHall",
+  "name": "Old City Hall, Toronto",
+  "desc": "Romanesque Revival sandstone civic building with a tall off-centre clock tower, steep green copper roofs, arched windows",
+  "batch": 1,
+  "n": 4,
+  "layout": {
+   "W": 1024,
+   "H": 1024,
+   "cols": 2,
+   "rows": 2
+  }
+ },
+ {
+  "id": "union-station",
+  "kind": "landmark",
+  "model": "union",
+  "name": "Union Station, Toronto",
+  "desc": "long low Beaux-Arts limestone railway station with a colonnade of Doric columns along the front and a slightly taller central hall",
+  "batch": 1,
+  "n": 5,
+  "layout": {
+   "W": 1024,
+   "H": 1024,
+   "cols": 2,
+   "rows": 2
+  }
+ },
+ {
+  "id": "first-canadian-place",
+  "kind": "landmark",
+  "model": "fcp",
+  "name": "First Canadian Place, Toronto",
+  "desc": "very tall slim square office tower clad in white, strong vertical window stripes, flat roof with a small mechanical box and antenna",
+  "batch": 1,
+  "n": 6,
+  "layout": {
+   "W": 1536,
+   "H": 1024,
+   "cols": 4,
+   "rows": 1
+  }
+ },
+ {
+  "id": "td-centre",
+  "kind": "landmark",
+  "model": "td",
+  "name": "Toronto-Dominion Centre",
+  "desc": "a cluster of three austere black steel-and-glass Miesian slab towers of different heights plus a low black banking pavilion",
+  "batch": 1,
+  "n": 7,
+  "layout": {
+   "W": 1024,
+   "H": 1024,
+   "cols": 2,
+   "rows": 2
+  }
+ },
+ {
+  "id": "scotia-plaza",
+  "kind": "landmark",
+  "model": "scotia",
+  "name": "Scotia Plaza, Toronto",
+  "desc": "tall office tower clad in red granite with a stepped, notched top",
+  "batch": 1,
+  "n": 8,
+  "layout": {
+   "W": 1536,
+   "H": 1024,
+   "cols": 4,
+   "rows": 1
+  }
+ },
+ {
+  "id": "royal-bank-plaza",
+  "kind": "landmark",
+  "model": "royal",
+  "name": "Royal Bank Plaza, Toronto",
+  "desc": "two triangular towers of different heights with faceted gold-tinted mirrored glass, serrated edges",
+  "batch": 2,
+  "n": 1,
+  "layout": {
+   "W": 1024,
+   "H": 1024,
+   "cols": 2,
+   "rows": 2
+  }
+ },
+ {
+  "id": "scotiabank-arena",
+  "kind": "landmark",
+  "model": "arena",
+  "name": "Scotiabank Arena, Toronto",
+  "desc": "wide low sports arena: stone Art Deco base (old postal building) with a modern stepped grey metal roof on top",
+  "batch": 2,
+  "n": 2,
+  "layout": {
+   "W": 1024,
+   "H": 1024,
+   "cols": 2,
+   "rows": 2
+  }
+ },
+ {
+  "id": "roy-thomson-hall",
+  "kind": "landmark",
+  "model": "thomson",
+  "name": "Roy Thomson Hall, Toronto",
+  "desc": "round concert hall shaped like an upside-down cupcake: sloping conical curtain of blue-grey diamond-pattern glass, flat round roof",
+  "batch": 2,
+  "n": 3,
+  "layout": {
+   "W": 1024,
+   "H": 1024,
+   "cols": 2,
+   "rows": 2
+  }
+ },
+ {
+  "id": "eaton-centre",
+  "kind": "landmark",
+  "model": "eaton",
+  "name": "Toronto Eaton Centre",
+  "desc": "long shopping galleria with an arched glass barrel-vault roof running its whole length, plus a mid-rise glass office block attached at one end",
+  "batch": 2,
+  "n": 4,
+  "layout": {
+   "W": 1024,
+   "H": 1024,
+   "cols": 2,
+   "rows": 2
+  }
+ },
+ {
+  "id": "ontario-legislature",
+  "kind": "landmark",
+  "model": "legislature",
+  "name": "Ontario Legislative Building (Queen's Park)",
+  "desc": "wide pink-brown sandstone Romanesque building, big central block with a steep slate hip roof, two small domed copper-topped towers on the wings, rows of arched windows",
+  "batch": 2,
+  "n": 5,
+  "layout": {
+   "W": 1024,
+   "H": 1024,
+   "cols": 2,
+   "rows": 2
+  }
+ },
+ {
+  "id": "university-college",
+  "kind": "landmark",
+  "model": "uc",
+  "name": "University College, University of Toronto",
+  "desc": "long Norman-Romanesque stone college building with a square central tower with pointed roof, and a round chapter house with conical roof at one end",
+  "batch": 2,
+  "n": 6,
+  "layout": {
+   "W": 1024,
+   "H": 1024,
+   "cols": 2,
+   "rows": 2
+  }
+ },
+ {
+  "id": "rom",
+  "kind": "landmark",
+  "model": "rom",
+  "name": "Royal Ontario Museum, Toronto",
+  "desc": "heritage buff-brick museum wing with a slate roof, with the Michael Lee-Chin Crystal bursting out of it: jagged interlocking prisms of pale aluminium and glass",
+  "batch": 2,
+  "n": 7,
+  "layout": {
+   "W": 1024,
+   "H": 1024,
+   "cols": 2,
+   "rows": 2
+  }
+ },
+ {
+  "id": "casa-loma",
+  "kind": "landmark",
+  "model": "casaLoma",
+  "name": "Casa Loma, Toronto",
+  "desc": "Gothic Revival castle of grey stone: main hall with red tile roofs, one tall round tower with a red conical roof, one shorter battlemented round tower, chimneys",
+  "batch": 2,
+  "n": 8,
+  "layout": {
+   "W": 1024,
+   "H": 1024,
+   "cols": 2,
+   "rows": 2
+  }
+ },
+ {
+  "id": "ago",
+  "kind": "landmark",
+  "model": "ago",
+  "name": "Art Gallery of Ontario",
+  "desc": "long stone gallery building with a huge curved glass-and-timber facade bulging along the front (Gehry), and a big titanium-blue box rising at the back",
+  "batch": 3,
+  "n": 1,
+  "layout": {
+   "W": 1024,
+   "H": 1024,
+   "cols": 2,
+   "rows": 2
+  }
+ },
+ {
+  "id": "ocad",
+  "kind": "landmark",
+  "model": "ocad",
+  "name": "OCAD University Sharp Centre, Toronto",
+  "desc": "a white box with black pixel-like square windows floating high in the air on tall, thin, tilted, brightly coloured pencil-like legs (red, yellow, blue, green, purple, orange), above an ordinary brick building",
+  "batch": 3,
+  "n": 2,
+  "layout": {
+   "W": 1024,
+   "H": 1024,
+   "cols": 2,
+   "rows": 2
+  }
+ },
+ {
+  "id": "st-lawrence-market",
+  "kind": "landmark",
+  "model": "stLawrence",
+  "name": "St. Lawrence Market, Toronto",
+  "desc": "long red-brick Victorian market hall with a big pitched roof and a tall arched brick entrance front",
+  "batch": 3,
+  "n": 3,
+  "layout": {
+   "W": 1024,
+   "H": 1024,
+   "cols": 2,
+   "rows": 2
+  }
+ },
+ {
+  "id": "gooderham",
+  "kind": "landmark",
+  "model": "flatiron",
+  "name": "Gooderham (Flatiron) Building, Toronto",
+  "desc": "small five-storey red-brick wedge-shaped flatiron building with a rounded prow topped by a green copper cone roof",
+  "batch": 3,
+  "n": 4,
+  "layout": {
+   "W": 1024,
+   "H": 1024,
+   "cols": 2,
+   "rows": 2
+  }
+ },
+ {
+  "id": "distillery",
+  "kind": "landmark",
+  "model": "distillery",
+  "name": "Distillery District, Toronto",
+  "desc": "group of dark red-brick Victorian industrial buildings with gabled slate roofs, a small white cupola with copper cap, and a tall slim brick chimney",
+  "batch": 3,
+  "n": 5,
+  "layout": {
+   "W": 1024,
+   "H": 1024,
+   "cols": 2,
+   "rows": 2
+  }
+ },
+ {
+  "id": "viaduct",
+  "kind": "landmark",
+  "model": "viaduct",
+  "name": "Prince Edward Viaduct (Bloor Viaduct), Toronto",
+  "desc": "long bridge deck on tall stone piers with dark steel arches between the piers",
+  "batch": 3,
+  "n": 6,
+  "layout": {
+   "W": 1024,
+   "H": 1024,
+   "cols": 2,
+   "rows": 2
+  }
+ },
+ {
+  "id": "brick-works",
+  "kind": "landmark",
+  "model": "brickworks",
+  "name": "Evergreen Brick Works, Toronto",
+  "desc": "two long low red-brick kiln sheds with pitched roofs and one tall brick chimney",
+  "batch": 3,
+  "n": 7,
+  "layout": {
+   "W": 1024,
+   "H": 1024,
+   "cols": 2,
+   "rows": 2
+  }
+ },
+ {
+  "id": "rc-harris",
+  "kind": "landmark",
+  "model": "rcHarris",
+  "name": "R.C. Harris Water Treatment Plant, Toronto",
+  "desc": "Art Deco \"palace of purification\": long cream-buff brick and limestone buildings with a taller central block and green copper roofs",
+  "batch": 3,
+  "n": 8,
+  "layout": {
+   "W": 1024,
+   "H": 1024,
+   "cols": 2,
+   "rows": 2
+  }
+ },
+ {
+  "id": "hearn",
+  "kind": "landmark",
+  "model": "hearn",
+  "name": "Hearn Generating Station, Toronto",
+  "desc": "huge long red-brick power station block with tall grid windows and one extremely tall slim concrete smokestack with red and white bands at the top",
+  "batch": 4,
+  "n": 1,
+  "layout": {
+   "W": 1024,
+   "H": 1024,
+   "cols": 2,
+   "rows": 2
+  }
+ },
+ {
+  "id": "redpath",
+  "kind": "landmark",
+  "model": "redpath",
+  "name": "Redpath Sugar refinery, Toronto waterfront",
+  "desc": "white industrial refinery block with a red rooftop box, three concrete silos beside it, and a dark bulk cargo ship moored alongside",
+  "batch": 4,
+  "n": 2,
+  "layout": {
+   "W": 1024,
+   "H": 1024,
+   "cols": 2,
+   "rows": 2
+  }
+ },
+ {
+  "id": "princes-gates",
+  "kind": "landmark",
+  "model": "gates",
+  "name": "Princes' Gates, Exhibition Place, Toronto",
+  "desc": "white neoclassical triumphal arch topped by a winged victory statue, with curved colonnades of columns sweeping out on both sides",
+  "batch": 4,
+  "n": 3,
+  "layout": {
+   "W": 1024,
+   "H": 1024,
+   "cols": 2,
+   "rows": 2
+  }
+ },
+ {
+  "id": "bmo-field",
+  "kind": "landmark",
+  "model": "bmo",
+  "name": "BMO Field, Toronto",
+  "desc": "open-air soccer stadium: green pitch with white markings surrounded by stands on four sides, one stand with red seats",
+  "batch": 4,
+  "n": 4,
+  "layout": {
+   "W": 1024,
+   "H": 1024,
+   "cols": 2,
+   "rows": 2
+  }
+ },
+ {
+  "id": "ferris-wheel",
+  "kind": "landmark",
+  "model": "ferris",
+  "name": "CNE midway Ferris wheel",
+  "desc": "classic fairground Ferris wheel with a red rim, thin spokes, small colourful gondolas, white A-frame supports",
+  "batch": 4,
+  "n": 5,
+  "layout": {
+   "W": 1024,
+   "H": 1024,
+   "cols": 2,
+   "rows": 2
+  }
+ },
+ {
+  "id": "ontario-place",
+  "kind": "landmark",
+  "model": "cinesphere",
+  "name": "Ontario Place Cinesphere and pods",
+  "desc": "white geodesic sphere (triangulated dome) held on thin struts, with three white square pavilion pods raised on stilts beside it",
+  "batch": 4,
+  "n": 6,
+  "layout": {
+   "W": 1024,
+   "H": 1024,
+   "cols": 2,
+   "rows": 2
+  }
+ },
+ {
+  "id": "sunnyside",
+  "kind": "landmark",
+  "model": "sunnyside",
+  "name": "Sunnyside Bathing Pavilion, Toronto",
+  "desc": "long low cream-coloured Beaux-Arts beach pavilion with an arcade of arches, terracotta tile roof and a taller central entrance",
+  "batch": 4,
+  "n": 7,
+  "layout": {
+   "W": 1024,
+   "H": 1024,
+   "cols": 2,
+   "rows": 2
+  }
+ },
+ {
+  "id": "humber-bridge",
+  "kind": "landmark",
+  "model": "humberBridge",
+  "name": "Humber Bay Arch Bridge, Toronto",
+  "desc": "white pedestrian bridge with two tall steel arches leaning toward each other and thin hanger cables down to a flat deck",
+  "batch": 4,
+  "n": 8,
+  "layout": {
+   "W": 1024,
+   "H": 1024,
+   "cols": 2,
+   "rows": 2
+  }
+ },
+ {
+  "id": "island-airport",
+  "kind": "landmark",
+  "model": "airport",
+  "name": "Billy Bishop island airport",
+  "desc": "small low glass terminal building, a short control tower with a dark glass cab, and a small white propeller plane with red tail parked beside it",
+  "batch": 5,
+  "n": 1,
+  "layout": {
+   "W": 1024,
+   "H": 1024,
+   "cols": 2,
+   "rows": 2
+  }
+ },
+ {
+  "id": "lighthouse",
+  "kind": "landmark",
+  "model": "lighthouse",
+  "name": "Gibraltar Point Lighthouse, Toronto Islands",
+  "desc": "old stubby hexagonal stone lighthouse, slightly tapering, with a red lantern room on top",
+  "batch": 5,
+  "n": 2,
+  "layout": {
+   "W": 1536,
+   "H": 1024,
+   "cols": 4,
+   "rows": 1
+  }
+ },
+ {
+  "id": "ferry",
+  "kind": "landmark",
+  "model": "ferry",
+  "name": "Toronto Island ferry",
+  "desc": "small white double-ended passenger ferry with a row of windows, a red upper deck and one black funnel (on water: draw only the boat)",
+  "batch": 5,
+  "n": 3,
+  "layout": {
+   "W": 1024,
+   "H": 1024,
+   "cols": 2,
+   "rows": 2
+  }
+ },
+ {
+  "id": "sailboat",
+  "kind": "landmark",
+  "model": "sail",
+  "name": "small sailboat",
+  "desc": "tiny white sailboat with a white mainsail and a pale salmon jib (draw only the boat)",
+  "batch": 5,
+  "n": 4,
+  "layout": {
+   "W": 1024,
+   "H": 1024,
+   "cols": 2,
+   "rows": 2
+  }
+ },
+ {
+  "id": "trees",
+  "kind": "trees",
+  "name": "four trees",
+  "desc": "NOT a turnaround: four different trees, one per cell: a round green maple, a dark green pointed spruce, an orange autumn maple, a light green birch. Simple, chunky, same scale",
+  "batch": 5,
+  "n": 5,
+  "layout": {
+   "W": 1024,
+   "H": 1024,
+   "cols": 2,
+   "rows": 2
+  }
+ },
+ {
+  "id": "house-a",
+  "kind": "generic",
+  "family": "house",
+  "floors": 3,
+  "variant": 0,
+  "name": "Toronto bay-and-gable house",
+  "desc": "narrow tall Victorian red-brick house with a steep front gable, bay window and a chimney",
+  "batch": 5,
+  "n": 6,
+  "layout": {
+   "W": 1024,
+   "H": 1024,
+   "cols": 2,
+   "rows": 2
+  }
+ },
+ {
+  "id": "house-b",
+  "kind": "generic",
+  "family": "house",
+  "floors": 3,
+  "variant": 1,
+  "name": "pair of semi-detached houses",
+  "desc": "two attached narrow brick houses with twin gables, different trim colours, chimneys",
+  "batch": 5,
+  "n": 7,
+  "layout": {
+   "W": 1024,
+   "H": 1024,
+   "cols": 2,
+   "rows": 2
+  }
+ },
+ {
+  "id": "house-c",
+  "kind": "generic",
+  "family": "house",
+  "floors": 2,
+  "variant": 2,
+  "name": "small two-storey brick house",
+  "desc": "modest two-storey brick house with a gable roof and a front porch",
+  "batch": 5,
+  "n": 8,
+  "layout": {
+   "W": 1024,
+   "H": 1024,
+   "cols": 2,
+   "rows": 2
+  }
+ },
+ {
+  "id": "bungalow",
+  "kind": "generic",
+  "family": "bungalow",
+  "floors": 1,
+  "variant": 0,
+  "name": "post-war bungalow",
+  "desc": "small one-storey suburban bungalow with a low gable roof and pale siding",
+  "batch": 6,
+  "n": 1,
+  "layout": {
+   "W": 1024,
+   "H": 1024,
+   "cols": 2,
+   "rows": 2
+  }
+ },
+ {
+  "id": "cottage-s",
+  "kind": "generic",
+  "family": "cottage",
+  "floors": 1,
+  "variant": 0,
+  "name": "island cottage",
+  "desc": "tiny pastel wooden cottage with a hipped shingle roof and a little porch",
+  "batch": 6,
+  "n": 2,
+  "layout": {
+   "W": 1024,
+   "H": 1024,
+   "cols": 2,
+   "rows": 2
+  }
+ },
+ {
+  "id": "cottage-m",
+  "kind": "generic",
+  "family": "cottage",
+  "floors": 1,
+  "variant": 2,
+  "name": "island cottage, second design",
+  "desc": "small wooden cottage in a different pastel colour with a hipped roof and a screened porch",
+  "batch": 6,
+  "n": 3,
+  "layout": {
+   "W": 1024,
+   "H": 1024,
+   "cols": 2,
+   "rows": 2
+  }
+ },
+ {
+  "id": "shop-m",
+  "kind": "generic",
+  "family": "shop",
+  "floors": 3,
+  "variant": 0,
+  "name": "row of three market shopfronts (Kensington style)",
+  "desc": "three narrow attached three-storey buildings in different bright colours with striped awnings and shop windows at street level (no readable signs)",
+  "batch": 6,
+  "n": 4,
+  "layout": {
+   "W": 1024,
+   "H": 1024,
+   "cols": 2,
+   "rows": 2
+  }
+ },
+ {
+  "id": "shop-l",
+  "kind": "generic",
+  "family": "shop",
+  "floors": 5,
+  "variant": 1,
+  "name": "row of three taller shopfronts",
+  "desc": "three narrow attached five-storey painted brick buildings in different colours with awnings at street level",
+  "batch": 6,
+  "n": 5,
+  "layout": {
+   "W": 1024,
+   "H": 1024,
+   "cols": 2,
+   "rows": 2
+  }
+ },
+ {
+  "id": "brick-s",
+  "kind": "generic",
+  "family": "brick",
+  "floors": 3,
+  "variant": 1,
+  "name": "three-storey brick walk-up",
+  "desc": "plain three-storey red-brick apartment block with a stone cornice and a wooden water tank on the roof",
+  "batch": 6,
+  "n": 6,
+  "layout": {
+   "W": 1024,
+   "H": 1024,
+   "cols": 2,
+   "rows": 2
+  }
+ },
+ {
+  "id": "brick-m",
+  "kind": "generic",
+  "family": "brick",
+  "floors": 5,
+  "variant": 0,
+  "name": "five-storey brick block",
+  "desc": "five-storey brown-brick commercial block with a stone cornice and regular windows",
+  "batch": 6,
+  "n": 7,
+  "layout": {
+   "W": 1024,
+   "H": 1024,
+   "cols": 2,
+   "rows": 2
+  }
+ },
+ {
+  "id": "brick-l",
+  "kind": "generic",
+  "family": "brick",
+  "floors": 8,
+  "variant": 1,
+  "name": "eight-storey brick block",
+  "desc": "eight-storey red-brick early-1900s office building with a stone cornice and a rooftop water tank",
+  "batch": 6,
+  "n": 8,
+  "layout": {
+   "W": 1024,
+   "H": 1024,
+   "cols": 2,
+   "rows": 2
+  }
+ },
+ {
+  "id": "gothic-m",
+  "kind": "generic",
+  "family": "gothic",
+  "floors": 5,
+  "variant": 0,
+  "name": "collegiate gothic hall",
+  "desc": "grey stone collegiate-gothic building with a gabled slate roof and a square corner tower with a green copper spire",
+  "batch": 7,
+  "n": 1,
+  "layout": {
+   "W": 1024,
+   "H": 1024,
+   "cols": 2,
+   "rows": 2
+  }
+ },
+ {
+  "id": "loft-m",
+  "kind": "generic",
+  "family": "loft",
+  "floors": 5,
+  "variant": 0,
+  "name": "brick warehouse loft",
+  "desc": "five-storey wide red-brick warehouse loft with large grid windows and a small rooftop box",
+  "batch": 7,
+  "n": 2,
+  "layout": {
+   "W": 1024,
+   "H": 1024,
+   "cols": 2,
+   "rows": 2
+  }
+ },
+ {
+  "id": "loft-l",
+  "kind": "generic",
+  "family": "loft",
+  "floors": 7,
+  "variant": 1,
+  "name": "tall brick warehouse loft",
+  "desc": "seven-storey wide red-brick factory loft with large grid windows and a tall brick chimney at one corner",
+  "batch": 7,
+  "n": 3,
+  "layout": {
+   "W": 1024,
+   "H": 1024,
+   "cols": 2,
+   "rows": 2
+  }
+ },
+ {
+  "id": "shed-s",
+  "kind": "generic",
+  "family": "shed",
+  "floors": 2,
+  "variant": 0,
+  "name": "dockside shed",
+  "desc": "long low corrugated-metal industrial shed with a shallow gable roof",
+  "batch": 7,
+  "n": 4,
+  "layout": {
+   "W": 1024,
+   "H": 1024,
+   "cols": 2,
+   "rows": 2
+  }
+ },
+ {
+  "id": "shed-m",
+  "kind": "generic",
+  "family": "shed",
+  "floors": 2,
+  "variant": 1,
+  "name": "dockside shed with containers",
+  "desc": "long low industrial shed with a shallow gable roof and a few stacked coloured shipping containers beside it",
+  "batch": 7,
+  "n": 5,
+  "layout": {
+   "W": 1024,
+   "H": 1024,
+   "cols": 2,
+   "rows": 2
+  }
+ },
+ {
+  "id": "silo",
+  "kind": "generic",
+  "family": "silo",
+  "floors": 8,
+  "variant": 0,
+  "name": "grain silos",
+  "desc": "three tall concrete grain silos side by side with small conical caps and a conveyor gallery across the top",
+  "batch": 7,
+  "n": 6,
+  "layout": {
+   "W": 1024,
+   "H": 1024,
+   "cols": 2,
+   "rows": 2
+  }
+ },
+ {
+  "id": "pavilion-m",
+  "kind": "generic",
+  "family": "pavilion",
+  "floors": 4,
+  "variant": 0,
+  "name": "exhibition pavilion",
+  "desc": "four-storey stone exhibition pavilion with a green copper pyramid roof and a flagpole",
+  "batch": 7,
+  "n": 7,
+  "layout": {
+   "W": 1024,
+   "H": 1024,
+   "cols": 2,
+   "rows": 2
+  }
+ },
+ {
+  "id": "pavilion-l",
+  "kind": "generic",
+  "family": "pavilion",
+  "floors": 5,
+  "variant": 1,
+  "name": "large exhibition pavilion",
+  "desc": "five-storey buff stone exhibition hall with a green copper pyramid roof and a flagpole",
+  "batch": 7,
+  "n": 8,
+  "layout": {
+   "W": 1024,
+   "H": 1024,
+   "cols": 2,
+   "rows": 2
+  }
+ },
+ {
+  "id": "condo-l",
+  "kind": "generic",
+  "family": "condo",
+  "floors": 9,
+  "variant": 0,
+  "name": "mid-rise condo",
+  "desc": "nine-storey modern condo tower with balconies rising from a wider two-storey stone podium",
+  "batch": 8,
+  "n": 1,
+  "layout": {
+   "W": 1024,
+   "H": 1024,
+   "cols": 2,
+   "rows": 2
+  }
+ },
+ {
+  "id": "condo-xl-a",
+  "kind": "generic",
+  "family": "condo",
+  "floors": 14,
+  "variant": 1,
+  "name": "tall condo tower",
+  "desc": "slim fourteen-storey glass-and-concrete condo tower with balconies on a wider two-storey podium",
+  "batch": 8,
+  "n": 2,
+  "layout": {
+   "W": 1024,
+   "H": 1024,
+   "cols": 2,
+   "rows": 2
+  }
+ },
+ {
+  "id": "condo-xl-b",
+  "kind": "generic",
+  "family": "condo",
+  "floors": 14,
+  "variant": 3,
+  "name": "tall condo tower, second design",
+  "desc": "slim fourteen-storey pale condo tower with balconies on a wider podium, different colour and roof detail",
+  "batch": 8,
+  "n": 3,
+  "layout": {
+   "W": 1024,
+   "H": 1024,
+   "cols": 2,
+   "rows": 2
+  }
+ },
+ {
+  "id": "glass-xl-a",
+  "kind": "generic",
+  "family": "glass",
+  "floors": 14,
+  "variant": 1,
+  "name": "glass office tower",
+  "desc": "fourteen-storey blue glass curtain-wall office tower with a smaller setback top and antenna",
+  "batch": 8,
+  "n": 4,
+  "layout": {
+   "W": 1536,
+   "H": 1024,
+   "cols": 4,
+   "rows": 1
+  }
+ },
+ {
+  "id": "glass-xl-b",
+  "kind": "generic",
+  "family": "glass",
+  "floors": 14,
+  "variant": 2,
+  "name": "glass office tower with pyramid top",
+  "desc": "fourteen-storey teal glass office tower with a low pyramid roof",
+  "batch": 8,
+  "n": 5,
+  "layout": {
+   "W": 1536,
+   "H": 1024,
+   "cols": 4,
+   "rows": 1
+  }
+ },
+ {
+  "id": "bank-l",
+  "kind": "generic",
+  "family": "bank",
+  "floors": 9,
+  "variant": 0,
+  "name": "bank office block",
+  "desc": "nine-storey broad dark-blue glass bank tower with a mechanical box on the roof",
+  "batch": 8,
+  "n": 6,
+  "layout": {
+   "W": 1024,
+   "H": 1024,
+   "cols": 2,
+   "rows": 2
+  }
+ },
+ {
+  "id": "bank-xl-a",
+  "kind": "generic",
+  "family": "bank",
+  "floors": 15,
+  "variant": 1,
+  "name": "bank tower",
+  "desc": "fifteen-storey broad blue glass bank tower with a setback crown and antenna",
+  "batch": 8,
+  "n": 7,
+  "layout": {
+   "W": 1536,
+   "H": 1024,
+   "cols": 4,
+   "rows": 1
+  }
+ },
+ {
+  "id": "bank-xl-b",
+  "kind": "generic",
+  "family": "bank",
+  "floors": 15,
+  "variant": 2,
+  "name": "bank tower with pyramid top",
+  "desc": "fifteen-storey broad blue-green glass bank tower with a low pyramid roof",
+  "batch": 8,
+  "n": 8,
+  "layout": {
+   "W": 1536,
+   "H": 1024,
+   "cols": 4,
+   "rows": 1
+  }
+ }
+]

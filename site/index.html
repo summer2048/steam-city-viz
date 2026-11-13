@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>City of Steam</title>
+<meta name="description" content="A hand-drawn city where every window is ten Steam games — and only the lit ones have players.">
+<link rel="stylesheet" href="css/city.css?v=20261113a">
+</head>
+<body>
+<canvas id="c"></canvas>
+
+<header id="title">
+  <p class="over">Steam · 1997 — 2026</p>
+  <h1>蒸汽之城</h1>
+  <p id="title-sub"></p>
+</header>
+<div id="hint">向下滚动 · 让时间倒回起点</div>
+
+<section id="cap"><h2></h2><p></p></section>
+<div id="hud"><div id="year">1997</div><div id="count"></div></div>
+
+<div id="legend">
+  <span><i class="w dark"></i><span id="l-dark"></span></span>
+  <span><i class="w lit"></i><span id="l-lit"></span></span>
+  <span><i class="w gold"></i><span id="l-gold"></span></span>
+  <span class="unit" id="l-unit"></span>
+</div>
+
+<div id="tools">
+  <button id="gold">只看金色的 1%</button>
+  <div id="search"><ul id="sug"></ul><input id="q" type="search" placeholder="搜一款你玩过的游戏，找到它的那扇窗" autocomplete="off" spellcheck="false"></div>
+</div>
+<button id="enter"></button>
+
+<div id="part2">
+  <button id="p2-back"></button>
+  <p id="p2-post"></p>
+  <div id="p2-turn"><button id="p2-left" aria-label="turn left">⟲</button><button id="p2-right" aria-label="turn right">⟳</button><span></span></div>
+  <aside id="guide"></aside>
+</div>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><filter id="wobble"><feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="4"/><feDisplacementMap in="SourceGraphic" scale="3.2"/></filter></svg>
+
+<div id="tip"></div>
+<aside id="card">
+  <button id="card-close" aria-label="关闭">×</button>
+  <img id="card-img" alt="">
+  <div class="card-body">
+    <h3 id="card-name"></h3>
+    <p id="card-meta"></p>
+    <p id="card-note"></p>
+    <a id="card-link" target="_blank" rel="noopener">在 Steam 查看 ↗</a>
+  </div>
+</aside>
+
+<div id="lang" role="group" aria-label="Language"><button data-lang="en">EN</button><button data-lang="zh">中文</button></div>
+<button id="skip"></button>
+<footer id="credit">数据：FronkonGames / steam-games-dataset · 封面版权归各发行商所有 · 非官方作品</footer>
+<main id="scroll" aria-hidden="true"></main>
+<script type="module" src="js/city.js?v=20261113a"></script>
+</body>
+</html>

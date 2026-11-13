@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>封面之墙 — Steam 上的十二万款游戏</title>
+<meta name="description" content="用 124,146 张游戏封面讲述 Steam 的故事。">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<canvas id="wall"></canvas>
+<div class="vignette"></div>
+
+<div id="loader">
+  <div class="loader-inner">
+    <p class="over">正在挂上 124,146 张封面</p>
+    <div class="bar"><div id="load-bar"></div></div>
+    <p id="load-msg"><span id="load-pct">0%</span></p>
+  </div>
+</div>
+
+<header id="title">
+  <p class="over">STEAM · 1997 — 2026</p>
+  <h1>封面之墙</h1>
+  <p id="title-sub"></p>
+</header>
+<div id="hint"><span>向下滚动</span><i></i></div>
+
+<div id="captions"></div>
+<div id="hud"><div id="hud-year">1997</div><div class="hud-sub">累计 <b id="hud-count">1</b> 款</div></div>
+<div id="labels"></div>
+
+<div id="tip"><img id="tip-img" alt=""><div class="tip-body"><div id="tip-name"></div><div id="tip-meta"></div></div></div>
+<aside id="card">
+  <button id="card-close" aria-label="关闭">×</button>
+  <img id="card-img" alt="">
+  <div class="card-body">
+    <p class="over" id="card-genre"></p>
+    <h3 id="card-name"></h3>
+    <p id="card-meta"></p>
+    <a id="card-link" target="_blank" rel="noopener">在 Steam 查看 ↗</a>
+  </div>
+</aside>
+
+<div id="pin"><i></i><div><img id="pin-img" alt=""><span>你的游戏</span></div></div>
+<div id="search"><ul id="sug"></ul><input id="q" type="search" placeholder="搜一款你玩过的游戏，看它在墙上的位置" autocomplete="off" spellcheck="false"></div>
+
+<button id="skip">跳过开场</button>
+<button id="enter" class="cta" disabled>进入展厅 <span>第二部分 · 制作中</span></button>
+<footer id="credit">数据：FronkonGames / steam-games-dataset · 封面图片版权归各发行商所有</footer>
+
+<main id="scroll" aria-hidden="true"></main>
+<script type="module" src="js/main.js"></script>
+</body>
+</html>

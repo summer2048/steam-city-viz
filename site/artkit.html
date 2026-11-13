@@ -1,0 +1,18 @@
+<!doctype html><meta charset="utf-8"><title>art kit references</title><body style="background:#888">
+<script type="module">
+import { LANDMARKS, generic, renderSprite, treeSprite } from './js/models.js';
+const items = await (await fetch('artkit-manifest.json')).json(), out = [];
+for (const it of items) {
+  let views;
+  if (it.kind === 'trees') views = [treeSprite(0, 1), treeSprite(1, 3), treeSprite(2, 4), treeSprite(0, 5)];
+  else { const parts = it.kind === 'landmark' ? LANDMARKS[it.model]() : generic(it.family, it.floors, it.variant); views = [45, 135, 225, 315].map((deg) => renderSprite(parts, (deg * Math.PI) / 180, { seed: 5, lit: 0.6 })); }
+  const mw = Math.max(...views.map((v) => v.w)), mh = Math.max(...views.map((v) => v.h)), ar = mh / mw;
+  const layout = ar > 1.7 ? { W: 1536, H: 1024, cols: 4, rows: 1 } : ar < 0.55 ? { W: 1024, H: 1536, cols: 1, rows: 4 } : { W: 1024, H: 1024, cols: 2, rows: 2 };
+  const cw = layout.W / layout.cols, ch = layout.H / layout.rows, s = Math.min((cw * 0.8) / mw, (ch * 0.8) / mh);
+  const cv = document.createElement('canvas'); cv.width = layout.W; cv.height = layout.H; const g = cv.getContext('2d'); g.fillStyle = '#fff'; g.fillRect(0, 0, layout.W, layout.H);
+  g.strokeStyle = '#d0d0d0'; g.lineWidth = 2; for (let c = 1; c < layout.cols; c++) { g.beginPath(); g.moveTo(c * cw, 0); g.lineTo(c * cw, layout.H); g.stroke(); } for (let r = 1; r < layout.rows; r++) { g.beginPath(); g.moveTo(0, r * ch); g.lineTo(layout.W, r * ch); g.stroke(); }
+  const anchors = views.map((v, k) => { const cx = (k % layout.cols + 0.5) * cw, cy = (Math.floor(k / layout.cols) + 0.5) * ch, x = cx - (v.w * s) / 2, y = cy - (v.h * s) / 2; g.drawImage(v.cv, x, y, v.w * s, v.h * s); return [+(v.ox / v.w).toFixed(4), +(v.oy / v.h).toFixed(4)]; });
+  out.push({ id: it.id, layout, anchors, unit: +(s).toFixed(4), png: cv.toDataURL('image/png') });
+}
+window.__refs = out; document.body.classList.add('ready');
+</script>

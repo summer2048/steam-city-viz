@@ -1,0 +1,166 @@
+:root {
+  --ink: #171a2e; --paper: #f3ead8; --lamp: #ffd27a; --accent: #ffb454;
+  --hand: "Kaiti SC", "KaiTi", "STKaiti", "楷体", "AR PL UKai CN", "Songti SC", "Noto Serif CJK SC", serif;
+  --num: Georgia, "Times New Roman", serif;
+  --edge: clamp(1.5rem, 6vw, 5.5rem); --top: clamp(3.5rem, 10vh, 7rem);
+}
+* { box-sizing: border-box; }
+html { background: #0c0e2c; }
+body { margin: 0; font-family: var(--hand); color: var(--paper); overflow-x: hidden; }
+#scroll { height: 1000vh; }
+canvas { position: fixed; inset: 0; width: 100vw; height: 100vh; display: block; }
+b { color: var(--lamp); font-weight: 700; }
+.shadow, #cap, #hud, #title, #legend, #hint { text-shadow: 0 2px 14px rgba(10, 12, 40, .9), 0 0 3px rgba(10, 12, 40, .6); }
+
+/* title */
+#title { position: fixed; left: var(--edge); top: 50%; transform: translateY(-58%); width: min(34rem, 40vw); pointer-events: none; }
+#title::before { content: ""; position: absolute; inset: -18% -30% -18% -40%; z-index: -1; background: radial-gradient(ellipse at 40% 50%, rgba(10, 12, 40, .82) 0%, rgba(10, 12, 40, .55) 45%, transparent 72%); }
+.over { font-family: var(--num); font-style: italic; letter-spacing: .28em; font-size: .95rem; margin: 0 0 1.2rem; opacity: .85; }
+#title h1 { font-size: clamp(4rem, 9.5vw, 9rem); line-height: 1; margin: 0; letter-spacing: .08em; font-weight: 700; }
+#title-sub { font-size: clamp(1.1rem, 1.6vw, 1.45rem); line-height: 1.9; margin: 1.8rem 0 0; }
+#hint { position: fixed; left: 50%; bottom: 2.2rem; transform: translateX(-50%); font-size: 1rem; letter-spacing: .3em; pointer-events: none; }
+#hint::after { content: ""; display: block; width: 1px; height: 2rem; margin: .7rem auto 0; background: linear-gradient(var(--paper), transparent); animation: drip 1.8s ease-in-out infinite; transform-origin: top; }
+@keyframes drip { 0% { transform: scaleY(0); } 60% { transform: scaleY(1); opacity: 1; } 100% { transform: scaleY(1); opacity: 0; } }
+
+/* story caption + year */
+#cap { position: fixed; left: var(--edge); top: var(--top); width: min(32rem, 46vw); pointer-events: none; opacity: 0; }
+#cap h2 { font-size: clamp(2rem, 4.4vw, 3.7rem); margin: 0 0 .8rem; letter-spacing: .06em; line-height: 1.18; }
+#cap p { font-size: clamp(1.05rem, 1.4vw, 1.28rem); line-height: 1.8; margin: 0; }
+#cap small { display: block; margin-top: .6rem; font-size: .85em; opacity: .75; }
+#cap.in h2, #cap.in p { animation: rise .7s cubic-bezier(.2, .8, .2, 1) both; } #cap.in p { animation-delay: .08s; }
+@keyframes rise { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+#hud { position: fixed; right: var(--edge); top: var(--top); text-align: right; pointer-events: none; opacity: 0; }
+#year { font-family: var(--num); font-style: italic; font-size: clamp(3rem, 7.5vw, 6.8rem); line-height: .9; font-variant-numeric: lining-nums tabular-nums; }
+#count { margin-top: .7rem; font-size: 1.05rem; opacity: .9; font-variant-numeric: tabular-nums; }
+
+/* legend */
+#legend { position: fixed; left: var(--edge); bottom: 2.6rem; display: flex; flex-wrap: wrap; gap: .4rem 1.5rem; font-size: .95rem; pointer-events: none; opacity: 0; max-width: 46vw; }
+.w { display: inline-block; width: .75em; height: .95em; margin-right: .45em; vertical-align: -.12em; border: 1.5px solid var(--ink); border-radius: 1px 2px 1px 2px; }
+.w.dark { background: #222943; } .w.lit { background: var(--lamp); } .w.gold { background: #fff7d6; box-shadow: 0 0 9px #ffe9a0; }
+.unit { opacity: .8; }
+
+/* paper-cut controls */
+.paper, #q, #gold, #skip, #enter, #tip, #card, #sug { background: var(--paper); color: var(--ink); border: 1.5px solid var(--ink); box-shadow: 3px 4px 0 rgba(10, 12, 40, .55); font-family: var(--hand); }
+#tools { position: fixed; right: var(--edge); bottom: 2.2rem; display: flex; align-items: flex-end; gap: .9rem; opacity: 0; pointer-events: none; transition: opacity .5s; }
+#tools.on { opacity: 1; pointer-events: auto; }
+#search { position: relative; width: min(23rem, 34vw); }
+#q { width: 100%; font-size: 1rem; padding: .65rem 1rem; border-radius: 4px 10px 5px 11px; outline: none; }
+#q::placeholder { color: rgba(23, 26, 46, .55); }
+#q:focus { border-color: #a4502f; box-shadow: 3px 4px 0 #a4502f; }
+#sug { position: absolute; left: 0; right: 0; bottom: calc(100% + .5rem); list-style: none; margin: 0; padding: .3rem 0; border-radius: 5px 11px 4px 10px; }
+#sug:empty { display: none; }
+#sug li { display: flex; justify-content: space-between; gap: 1rem; padding: .45rem 1rem; cursor: pointer; }
+#sug li b { color: inherit; font-weight: 400; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+#sug li span { opacity: .6; font-family: var(--num); }
+#sug li:hover, #sug li:first-child:not(.none) { background: rgba(255, 180, 84, .4); }
+#sug li.none { opacity: .6; cursor: default; }
+#gold { display: none; font-size: 1rem; padding: .65rem 1rem; border-radius: 9px 4px 10px 5px; cursor: pointer; white-space: nowrap; }
+#gold.show { display: block; } #gold.on { background: #fff3c4; box-shadow: 0 0 16px #ffe08a, 3px 4px 0 rgba(10, 12, 40, .55); }
+#skip { position: fixed; right: var(--edge); top: 1.2rem; font-size: .85rem; padding: .35rem .8rem; border-radius: 8px 3px 9px 4px; cursor: pointer; opacity: .8; }
+#skip:hover { opacity: 1; }
+#enter { position: fixed; right: var(--edge); top: var(--top); font-size: 1.25rem; padding: .7rem 1.3rem; border-radius: 5px 12px 6px 13px; opacity: 0; pointer-events: none; transition: opacity .5s; }
+#enter.on { opacity: .95; } #enter span { font-size: .8rem; opacity: .6; margin-left: .6rem; }
+#tip { position: fixed; left: 0; top: 0; padding: .4rem .7rem; font-size: .95rem; border-radius: 3px 8px 4px 9px; pointer-events: none; opacity: 0; transition: opacity .15s; white-space: nowrap; z-index: 5; }
+
+/* game card */
+#card { position: fixed; right: var(--edge); top: 50%; width: min(22rem, 30vw); padding: .7rem .7rem 1rem; border-radius: 4px 12px 5px 13px; transform: translateY(-50%) rotate(1.2deg) translateX(30px); opacity: 0; pointer-events: none; transition: opacity .3s, transform .45s cubic-bezier(.2, .8, .2, 1); z-index: 6; }
+#card.on { opacity: 1; pointer-events: auto; transform: translateY(-50%) rotate(1.2deg); }
+#card img { display: block; width: 100%; aspect-ratio: 460/215; object-fit: cover; border: 1.5px solid var(--ink); background: #d9cfba; }
+.card-body { padding: .7rem .3rem 0; }
+.card-body h3 { margin: 0 0 .3rem; font-size: 1.35rem; line-height: 1.3; }
+#card-meta { margin: 0 0 .4rem; font-size: .92rem; opacity: .75; font-variant-numeric: tabular-nums; }
+#card-note { margin: 0 0 .6rem; font-size: 1rem; color: #a4502f; } #card-note:empty { display: none; }
+#card-link { color: var(--ink); font-size: .95rem; text-underline-offset: .25em; }
+#card-close { position: absolute; right: -.7rem; top: -.7rem; width: 1.9rem; height: 1.9rem; border-radius: 50%; border: 1.5px solid var(--ink); background: var(--accent); color: var(--ink); font-size: 1.1rem; line-height: 1; cursor: pointer; }
+#credit { position: fixed; left: var(--edge); bottom: .7rem; font-size: .72rem; opacity: .5; font-family: system-ui, sans-serif; pointer-events: none; }
+@media (prefers-reduced-motion: reduce) { #hint::after, #cap.in h2, #cap.in p { animation: none; } }
+
+/* language switch */
+#lang { position: fixed; right: calc(var(--edge) + 9.5rem); top: 1.2rem; display: flex; z-index: 4; }
+#lang button { font-family: var(--num); font-size: .85rem; padding: .35rem .7rem; background: var(--paper); color: var(--ink); border: 1.5px solid var(--ink); cursor: pointer; opacity: .6; }
+#lang button:first-child { border-radius: 8px 0 0 4px; border-right: 0; } #lang button:last-child { border-radius: 0 3px 9px 0; font-family: var(--hand); }
+#lang button.on { opacity: 1; background: var(--accent); }
+#skip { min-width: 8.5rem; text-align: center; }
+/* English uses a handwriting face for headings and a quiet serif for body */
+html[lang="en"] body { font-family: Georgia, "Times New Roman", serif; }
+html[lang="en"] #title h1, html[lang="en"] #cap h2 { font-family: "Ink Free", "Bradley Hand", "Segoe Print", "Noteworthy", "Comic Sans MS", Georgia, serif; letter-spacing: .01em; }
+html[lang="en"] #title h1 { font-size: clamp(3.4rem, 7.6vw, 7.4rem); }
+html[lang="en"] #cap h2 { font-size: clamp(1.9rem, 3.8vw, 3.3rem); }
+html[lang="en"] #hint { letter-spacing: .14em; }
+/* daylight scenes: ink on paper instead of light on night */
+#cap, #hud, #legend { transition: color .8s, text-shadow .8s; }
+body.day #cap, body.day #hud { color: var(--ink); text-shadow: 0 0 12px rgba(255, 250, 235, .9), 0 0 3px rgba(255, 250, 235, .8); }
+body.day #cap b { color: #a4502f; }
+
+/* ---------- part 2: districts ---------- */
+#enter { cursor: pointer; } #enter:hover { background: var(--accent); }
+body.part2 { overflow: hidden; }
+body.part2 #title, body.part2 #hint, body.part2 #cap, body.part2 #hud, body.part2 #legend, body.part2 #tools, body.part2 #skip, body.part2 #enter, body.part2 #credit { display: none; }
+#part2 { display: none; } #part2.on { display: block; }
+#p2-title { position: fixed; left: var(--edge); top: clamp(1.2rem, 4vh, 2.5rem); width: min(34rem, 44vw); text-shadow: 0 2px 14px rgba(10, 12, 40, .9); pointer-events: none; transition: opacity .4s; }
+#p2-title h2 { font-size: clamp(2.2rem, 4.4vw, 3.8rem); margin: .9rem 0 .5rem; line-height: 1.1; }
+#p2-sub { font-size: clamp(1rem, 1.3vw, 1.2rem); line-height: 1.7; margin: 0; }
+#part2.picked #p2-head, #part2.picked #p2-sub { opacity: 0; }
+#p2-back, .paper-btn, #guide .nav button { pointer-events: auto; font-family: inherit; font-size: .95rem; padding: .4rem .9rem; background: var(--paper); color: var(--ink); border: 1.5px solid var(--ink); border-radius: 8px 3px 9px 4px; box-shadow: 3px 4px 0 rgba(10, 12, 40, .55); cursor: pointer; text-shadow: none; }
+#p2-back:hover, .paper-btn:hover, #guide .nav button:hover { background: var(--accent); }
+html[lang="en"] #p2-title h2, html[lang="en"] #guide h2 { font-family: "Ink Free", "Bradley Hand", "Segoe Print", "Noteworthy", "Comic Sans MS", Georgia, serif; }
+
+#guide { position: fixed; right: var(--edge); top: 4.2rem; bottom: 1.6rem; width: min(40rem, 45vw); padding: 1.4rem 1.6rem 2rem; overflow-y: auto; background: var(--paper); color: var(--ink); border: 1.5px solid var(--ink); border-radius: 5px 14px 6px 15px; box-shadow: 5px 7px 0 rgba(10, 12, 40, .5);
+  background-image: radial-gradient(rgba(120, 90, 40, .07) 1px, transparent 1.2px); background-size: 7px 7px;
+  opacity: 0; transform: translateX(40px) rotate(.4deg); pointer-events: none; transition: opacity .35s, transform .5s cubic-bezier(.2, .8, .2, 1); scrollbar-width: thin; scrollbar-color: rgba(23, 26, 46, .4) transparent; }
+#guide.on { opacity: 1; transform: rotate(.4deg); pointer-events: auto; }
+#guide .nav { display: flex; justify-content: space-between; align-items: center; } #guide .nav span { display: flex; gap: .5rem; }
+#guide .nav button { box-shadow: 2px 3px 0 rgba(10, 12, 40, .35); }
+#guide h2 { font-size: clamp(2rem, 3.4vw, 3rem); margin: 1rem 0 .5rem; line-height: 1.1; }
+#guide .fact { font-size: 1.08rem; line-height: 1.75; margin: 0; } #guide b { color: #a4502f; }
+#guide section { margin-top: 1.6rem; padding-top: 1.2rem; border-top: 1.5px dashed rgba(23, 26, 46, .35); }
+#guide h3 { font-size: 1.35rem; margin: 0 0 .25rem; }
+#guide .note { font-size: .88rem; line-height: 1.6; opacity: .7; margin: 0 0 .7rem; } #guide .foot { margin-top: 1.6rem; }
+.chart { display: block; width: 100%; height: auto; overflow: visible; }
+.chart text { font-size: 13px; fill: var(--ink); font-family: inherit; font-variant-numeric: tabular-nums; }
+.chart rect { filter: url(#wobble); stroke: var(--ink); stroke-width: 1.2; }
+.chart .track { fill: rgba(23, 26, 46, .06); stroke: none; } .chart .lit { fill: #f0b948; } .chart .dark { fill: #39426b; }
+.chart .axis { stroke: var(--ink); stroke-width: 1.3; filter: url(#wobble); }
+.chart .star { fill: #8a6a1a; } .chart g { opacity: .55; } .chart g.me { opacity: 1; } .chart g.me text { font-weight: 700; } .chart g.me .lit { fill: #e8892c; }
+.posters { display: grid; gap: .8rem .7rem; } .posters.four { grid-template-columns: repeat(4, 1fr); } .posters.three { grid-template-columns: repeat(3, 1fr); margin-bottom: .9rem; }
+.poster { all: unset; cursor: pointer; display: block; min-width: 0; }
+.poster img { display: block; width: 100%; aspect-ratio: 460/215; object-fit: cover; border: 1.5px solid var(--ink); background: #d9cfba; box-shadow: 2px 3px 0 rgba(10, 12, 40, .35); transition: transform .2s; }
+.poster:nth-child(odd) img { transform: rotate(-.8deg); } .poster:nth-child(even) img { transform: rotate(.7deg); }
+.poster:hover img, .poster:focus-visible img { transform: scale(1.06) rotate(0deg); }
+.poster b { display: block; margin-top: .4rem; font-size: .82rem; line-height: 1.25; color: var(--ink) !important; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.poster span { display: block; font-size: .74rem; opacity: .65; font-variant-numeric: tabular-nums; }
+body.part2 #card { right: auto; left: var(--edge); top: auto; bottom: 1.6rem; transform: rotate(-1deg) translateY(30px); z-index: 8; }
+body.part2 #card.on { transform: rotate(-1deg); }
+#enter.on { pointer-events: auto; opacity: 1; }
+
+/* ---------- part 2 as a diorama ---------- */
+#p2-back { position: fixed; left: var(--edge); top: 1.6rem; z-index: 4; }
+#p2-post { position: fixed; left: var(--edge); bottom: 1.5rem; margin: 0; font-size: 1.15rem; letter-spacing: .04em; color: var(--ink); opacity: .75; pointer-events: none; font-style: italic; }
+html[lang="en"] #p2-post { font-family: "Ink Free", "Bradley Hand", "Segoe Print", "Noteworthy", Georgia, serif; }
+#guide { width: min(27rem, 31vw); top: 4.4rem; }
+#guide h2 { font-size: clamp(1.7rem, 2.6vw, 2.4rem); margin-top: .6rem; }
+#guide h2 .sw, .drow i { display: inline-block; width: .7em; height: .7em; border: 1.5px solid var(--ink); border-radius: 2px 3px 2px 3px; margin-right: .45em; }
+#guide .keys { margin: 1rem 0 1.1rem; padding-left: 1.1rem; font-size: .95rem; line-height: 1.6; } #guide .keys li { margin-bottom: .45rem; }
+.rows { display: grid; gap: .35rem; }
+.drow { all: unset; cursor: pointer; display: grid; grid-template-columns: auto 1fr auto; align-items: baseline; gap: .2rem; padding: .45rem .6rem; border: 1.5px solid rgba(23, 26, 46, .25); border-radius: 4px 9px 5px 8px; }
+.drow:hover, .drow:focus-visible { background: rgba(255, 180, 84, .35); border-color: var(--ink); }
+.drow b { color: var(--ink) !important; font-size: 1.05rem; } .drow span { font-size: .82rem; opacity: .7; font-variant-numeric: tabular-nums; }
+.posters.two { grid-template-columns: repeat(2, 1fr); margin: 1rem 0; }
+.poster.wide { display: block; width: 100%; margin-bottom: .9rem; } .poster.wide b { font-size: 1rem; white-space: normal; }
+.residents { list-style: decimal; margin: 1rem 0; padding-left: 2.6rem; font-size: .9rem; }
+.residents li { margin: 0; padding: 0; border-bottom: 1px dashed rgba(23, 26, 46, .22); font-variant-numeric: tabular-nums; }
+.residents button { all: unset; cursor: pointer; display: flex; justify-content: space-between; gap: .8rem; width: 100%; padding: .38rem .2rem; box-sizing: border-box; }
+.residents button:hover, .residents button:focus-visible { background: rgba(255, 180, 84, .35); }
+.residents b { color: var(--ink) !important; font-weight: 400; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; } .residents span { opacity: .6; white-space: nowrap; font-size: .8rem; }
+body.part2 #card { left: var(--edge); bottom: 4rem; }
+#part2.deep #p2-post { opacity: 0; }
+#p2-post { transition: opacity .4s; }
+
+/* ---------- part 2 as a turnable map ---------- */
+#p2-turn { position: fixed; left: var(--edge); bottom: 3.6rem; display: flex; align-items: center; gap: .5rem; z-index: 4; }
+#p2-turn button { font-size: 1.25rem; line-height: 1; width: 2.4rem; height: 2.4rem; background: var(--paper); color: var(--ink); border: 1.5px solid var(--ink); border-radius: 50%; box-shadow: 3px 4px 0 rgba(10, 12, 40, .55); cursor: pointer; }
+#p2-turn button:hover { background: var(--accent); }
+#p2-turn span { font-size: .9rem; color: var(--ink); opacity: .75; margin-left: .4rem; }
+#part2.deep #p2-post { opacity: .0; }
+.drow b em { display: block; font-style: normal; font-weight: 400; font-size: .74rem; opacity: .65; margin-top: .1rem; }
+#guide .hood { margin: -.2rem 0 .6rem; font-size: .95rem; opacity: .7; font-style: italic; }

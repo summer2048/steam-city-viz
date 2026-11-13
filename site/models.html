@@ -1,0 +1,13 @@
+<!doctype html><meta charset="utf-8"><title>component sheet</title>
+<body style="margin:0;background:#e9dcc0;font:12px sans-serif">
+<canvas id="c" width="2400" height="2100"></canvas>
+<script type="module">
+import { LANDMARKS, generic, renderSprite, treeSprite, ANG, SS } from './js/models.js';
+const g = document.getElementById('c').getContext('2d'); g.fillStyle = '#e9dcc0'; g.fillRect(0, 0, 2400, 2100);
+let x = 20, y = 20, rowH = 0; const put = (sp, label, k = 1) => { const w = sp.w * k, h = sp.h * k; if (x + w > 2380) { x = 20; y += rowH + 22; rowH = 0; } g.drawImage(sp.cv, x, y, w, h); g.fillStyle = '#171a2e'; g.fillText(label, x, y + h + 11); x += w + 14; rowH = Math.max(rowH, h); };
+for (const [name, fn] of Object.entries(LANDMARKS)) for (const a of [0, 2, 5, 11]) put(renderSprite(fn(), (a / ANG) * 6.2832, { seed: 3 }), a === 0 ? name : '', 1);
+x = 20; y += rowH + 30; rowH = 0;
+for (const fam of ['glass', 'bank', 'condo', 'brick', 'loft', 'shop', 'house', 'cottage', 'shed', 'silo', 'pavilion', 'gothic', 'bungalow']) for (const [fl, v] of [[2, 0], [3, 1], [5, 2], [8, 1], [12, 0], [16, 2]]) { if ((['house', 'cottage', 'bungalow', 'shed'].includes(fam) && fl > 3) || (['shop', 'pavilion', 'gothic', 'loft', 'silo'].includes(fam) && fl > 8)) continue; put(renderSprite(generic(fam, fl, v), ((v * 3) / ANG) * 6.2832, { seed: fl * 7 + v, lit: 0.6 }), fam + ' ' + fl, 1); }
+for (let k = 0; k < 6; k++) put(treeSprite(k % 3, k), 'tree');
+document.body.classList.add('ready');
+</script>
