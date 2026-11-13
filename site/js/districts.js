@@ -1,8 +1,9 @@
 // 蒸汽之城 — part 2: an illustrated map of Toronto you can turn around. Three layers:
 // the whole city → a genre's neighbourhood → one building (one game, or many).
 import { $, fmt, clamp, lerp, smooth, rng, rline, INK, PAPER_C, makePaper, makeCloud, drawBalloon, lang } from './draw.js';
-import { renderSprite, generic, LANDMARKS, treeSprite, SINP, COSP, SP, SS, ANG, shade } from './models.js?v=20261113a';
-import { toGrid, BOUNDS, SHORE, ISLAND, SPIT, ONTARIO_PLACE, DON, HUMBER, PARKS, ROADS, RUNWAY, LANDMARKS_AT, DISTRICTS } from './toronto.js?v=20261113a';
+import { renderSprite, generic, LANDMARKS, treeSprite, SINP, COSP, SP, SS, ANG, shade } from './models.js?v=20261113b';
+import { loadArt, viewOf, TH0, TURN } from './sprites.js?v=20261113b';
+import { toGrid, BOUNDS, SHORE, ISLAND, SPIT, ONTARIO_PLACE, DON, HUMBER, PARKS, ROADS, RUNWAY, LANDMARKS_AT, DISTRICTS } from './toronto.js?v=20261113b';
 
 const T = {
   en: {
@@ -112,16 +113,18 @@ export function createDistricts({ cv, g, openCard, closeCard, getMouse, onExit }
   let ready = false, loading = null, active = false, fade = 0, cam = null, tgt = null, bal = null, big = null, namesReady = false, paper, clouds, map;
   let dist = [], order = [], items = [], boards = [], view = { type: 'city' }, hover = null, hoverD = -1, drag = null, moved = false, sortedTh = 99, pools = null;
   const cache = new Map(), puffs = [], root = $('#part2'), guide = $('#guide'), tip = $('#tip'), t = () => T[lang], dn = (d) => t().names[d.key];
-  let budget = 0;
+  let budget = 0, art = null, artView = 0; // art: the hand-painted sprites (sprites.js); artView: which of their four views faces the camera
   function sprite(it, bucket) { // cached per view angle; new ones are drawn a few per frame so turning never stalls
     if (it.kind === 'tree') return it.sp;
+    if (it.art) return (it.last = it.art[artView]); // painted; everything below is the code-drawn fallback
     const k = it.key + '|' + bucket; let s = cache.get(k);
     if (!s && budget > 0) { budget--; s = renderSprite(it.parts(), (bucket / ANG) * 6.2832, { seed: it.seed, lit: it.lit }); cache.set(k, s); }
     if (s) it.last = s; return s || it.last;
   }
 
   async function load() {
-    const [meta, buf, dio] = await Promise.all([fetch('data/meta.json').then((r) => r.json()), fetch('data/cols.bin').then((r) => r.arrayBuffer()), fetch('data/diorama.json').then((r) => r.json())]);
+    const [meta, buf, dio, kit] = await Promise.all([fetch('data/meta.json').then((r) => r.json()), fetch('data/cols.bin').then((r) => r.arrayBuffer()), fetch('data/diorama.json').then((r) => r.json()), new URLSearchParams(location.search).has('noart') ? null : loadArt()]);
+    art = kit;
     const TY = { float32: Float32Array, uint32: Uint32Array, uint16: Uint16Array, int16: Int16Array, uint8: Uint8Array }, d = {};
     for (const c of meta.columns) d[c.name] = new TY[c.type](buf, c.offset, c.length);
     const by = GENRE_IDX.map(() => []); for (let i = 0; i < meta.n; i++) by[d.genre[i]].push(i);
@@ -134,7 +137,7 @@ export function createDistricts({ cv, g, openCard, closeCard, getMouse, onExit }
     map = paintMap(dist); paper = makePaper();
     clouds = (() => { const R = rng(9), imgs = [makeCloud(4), makeCloud(5), makeCloud(6)]; return Array.from({ length: 6 }, (_, k) => ({ img: imgs[k % 3], x: R(), y: 0.03 + R() * 0.2, s: 0.8 + R() * 0.9, v: 0.003 + R() * 0.005 })); })();
     // landmarks
-    const lms = LANDMARKS_AT.map(([model, ll, scale, dk, en, zh], k) => { const [u, v] = toGrid(ll); return { kind: 'lm', u, v, key: 'lm:' + model, parts: LANDMARKS[model], scale: scale * BK, seed: 40 + k, lit: 0.7, d: dist.find((x) => x.key === dk), name: { en, zh } }; });
+    const lms = LANDMARKS_AT.map(([model, ll, scale, dk, en, zh], k) => { const [u, v] = toGrid(ll); return { kind: 'lm', u, v, key: 'lm:' + model, parts: LANDMARKS[model], art: art && art.landmark(model), scale: scale * BK, seed: 40 + k, lit: 0.7, d: dist.find((x) => x.key === dk), name: { en, zh } }; });
     // billboards: one per district beside its main core, and one for the whole city at Yonge–Dundas Square
     const mkBoard = (u, v, d, pool) => { const w = pool.map((c) => Math.sqrt(c.rev + 1)); return { kind: 'board', u, v, d, pool, w, sum: w.reduce((a, b) => a + b, 0), cur: 0, prev: 0, t0: -boards.length * 0.7, imgs: pool.map(() => null) }; };
     for (const d of dist) { boards.push(d.board = mkBoard(d.cores[0][0] + 230, d.cores[0][1] - 260, d, d.pool)); }
@@ -165,15 +168,15 @@ export function createDistricts({ cv, g, openCard, closeCard, getMouse, onExit }
         const cap = { house: 3, bungalow: 2, cottage: 2, shed: 2, shop: 5, pavilion: 5, gothic: 6, loft: 7, silo: 8 }[fam] || 99, fl = Math.min(floors, cap), lit = Math.max(0, Math.min(b[k + 1], litC) - s0) / cnt, gold = Math.max(0, Math.min(b[k + 1], goldC) - s0);
         const lv = lit < 0.2 ? 0 : lit < 0.7 ? 1 : 2, vr = Math.floor(q.h * 97) % 4, bld = { d: x, start: s0, n: cnt, maxRev, minRev: rev[x.ids[b[k + 1] - 1]], lit, gold, floors, top: s0 < x.pool.length ? x.pool[s0].name : null };
         if (cnt === 1) x.solo++; x.last = Math.max(x.last, cnt);
-        items.push({ kind: 'b', u: q.p[0], v: q.p[1], b: bld, key: `${fam}|${fl}|${vr}|${lv}`, parts: () => generic(fam, fl, vr), scale: 0.95, seed: 11 + fl * 7 + vr, lit: [0.08, 0.45, 0.85][lv] });
+        items.push({ kind: 'b', u: q.p[0], v: q.p[1], b: bld, key: `${fam}|${fl}|${vr}|${lv}`, parts: () => generic(fam, fl, vr), art: art && art.generic(fam, fl, vr, lv), scale: 0.95, seed: 11 + fl * 7 + vr, lit: [0.08, 0.45, 0.85][lv] });
       });
     }
     // trees and boats for company
-    const trees = [treeSprite(0, 1), treeSprite(0, 2), treeSprite(1, 3), treeSprite(2, 4), treeSprite(0, 5)], RT = rng(77), tree = (p) => items.push({ kind: 'tree', u: p[0], v: p[1], sp: trees[Math.floor(RT() * trees.length)], scale: 1.1 + RT() * 0.5 });
+    const trees = art && art.trees.length ? art.trees : [treeSprite(0, 1), treeSprite(0, 2), treeSprite(1, 3), treeSprite(2, 4), treeSprite(0, 5)], RT = rng(77), tree = (p) => items.push({ kind: 'tree', u: p[0], v: p[1], sp: trees[Math.floor(RT() * trees.length)], scale: 1.1 + RT() * 0.5 });
     for (const [x, y, a, b] of G.parks) for (let k = 0; k < Math.round((a * b) / 26000); k++) { const tt = RT() * 6.2832, r = Math.sqrt(RT()) * 0.9; tree([x + Math.cos(tt) * a * r, y + Math.sin(tt) * b * r]); }
     for (const poly of [G.island, G.spit]) { const xs = poly.map((p) => p[0]), ys = poly.map((p) => p[1]); for (let k = 0; k < 150; k++) { const p = [lerp(Math.min(...xs), Math.max(...xs), RT()), lerp(Math.min(...ys), Math.max(...ys), RT())]; if (inPoly(p, poly) && !G.runway.some((r) => segDist(p, r[0], r[1]) < 300) && !items.some((it) => it.kind === 'b' && Math.hypot(it.u - p[0], it.v - p[1]) < 170)) tree(p); } }
     for (const line of [G.don, G.humber]) for (let k = 0; k < line.length - 1; k++) for (let j = 0; j < 7; j++) { const u = RT(), side = RT() < 0.5 ? -1 : 1, p = [lerp(line[k][0], line[k + 1][0], u) + side * (90 + RT() * 130), lerp(line[k][1], line[k + 1][1], u) + (RT() - .5) * 120]; if (G.onLand(p)) tree(p); }
-    for (const [model, ll, sc] of [['ferry', [43.6316, -79.3762], 1], ['sail', [43.6255, -79.4350], 1.2], ['sail', [43.6190, -79.3540], 1.2], ['sail', [43.6330, -79.3110], 1.2], ['sail', [43.6140, -79.4120], 1.2]]) { const [u, v] = toGrid(ll); items.push({ kind: 'boat', u, v, key: 'lm:' + model, parts: LANDMARKS[model], scale: sc * BK, seed: 9, lit: 0.5 }); }
+    for (const [model, ll, sc] of [['ferry', [43.6316, -79.3762], 1], ['sail', [43.6255, -79.4350], 1.2], ['sail', [43.6190, -79.3540], 1.2], ['sail', [43.6330, -79.3110], 1.2], ['sail', [43.6140, -79.4120], 1.2]]) { const [u, v] = toGrid(ll); items.push({ kind: 'boat', u, v, key: 'lm:' + model, parts: LANDMARKS[model], art: art && art.landmark(model), scale: sc * BK, seed: 9, lit: 0.5 }); }
     items.push(...lms, ...boards);
     order = [...dist].sort((a, b) => b.count - a.count);
     for (const x of dist) { const ds = items.filter((it) => it.kind === 'b' && it.b.d === x).map((it) => Math.hypot(it.u - x.cores[0][0], it.v - x.cores[0][1])).sort((a, b) => a - b); x.reach = Math.max(900, ds[Math.floor(ds.length * 0.55)] || 0); }
@@ -236,8 +239,8 @@ export function createDistricts({ cv, g, openCard, closeCard, getMouse, onExit }
   guide.addEventListener('pointerleave', () => { hoverD = -1; overPanel = false; });
   function go(v, keepCam) { view = v; closeCard(); if (v.type === 'building') v.limit = 200; render(); guide.scrollTop = 0; if (!keepCam) frameCam(); }
   function frameCam() { // the focus point is held at a fixed spot left of the panel, whatever the zoom and angle
-    const W = innerWidth, H = innerHeight, th = tgt ? tgt.th : 0, d = viewD();
-    if (!d) tgt = { f: [-300, 1500], z: Math.min((W * 0.8) / (u1 - u0), (H * 0.8) / ((v1 - v0) * SINP)), th }; // the east end slips under the panel; drag to see it
+    const W = innerWidth, H = innerHeight, th = tgt ? tgt.th : TH0, d = viewD(), ca = Math.abs(Math.cos(th)), sa = Math.abs(Math.sin(th));
+    if (!d) tgt = { f: [-300, 1500], z: Math.min((W * 0.8) / ((u1 - u0) * ca + (v1 - v0) * sa), (H * 0.8) / (((u1 - u0) * sa + (v1 - v0) * ca) * SINP)), th }; // the east end slips under the panel; drag to see it
     else tgt = { f: [d.cores[0][0], d.cores[0][1] + d.reach * 0.25], z: clamp((Math.min(W * 0.56, H * 0.9) * 0.5) / d.reach, 0.15, 0.3), th };
   }
   function relang() { $('#p2-back').textContent = t().back; $('#p2-post').textContent = t().postcard; $('#p2-turn span').textContent = t().turn; render(); }
@@ -260,7 +263,7 @@ export function createDistricts({ cv, g, openCard, closeCard, getMouse, onExit }
   addEventListener('pointermove', (e) => { if (!active || !drag) return; const dx = e.clientX - drag.x, dy = e.clientY - drag.y; if (Math.abs(dx) + Math.abs(dy) > 5) moved = true; if (moved) { const xr = -dx / cam.z, yr = dy / (cam.z * SINP), c = Math.cos(cam.th), s = Math.sin(cam.th); tgt.f = [clamp(drag.f[0] + xr * c + yr * s, u0, u1), clamp(drag.f[1] - xr * s + yr * c, v0, v1)]; } });
   addEventListener('pointerup', () => { drag = null; });
   cv.addEventListener('wheel', (e) => { if (!active || !cam) return; e.preventDefault(); tgt.z = clamp(tgt.z * Math.exp(-e.deltaY * 0.0015), 0.035, 0.6); }, { passive: false });
-  const turn = (dir) => { if (tgt) tgt.th += (dir * Math.PI) / 4; };
+  const turn = (dir) => { if (tgt) tgt.th += dir * TURN; }; // a quarter turn: the painted sprites have four views
   $('#p2-left').addEventListener('click', () => turn(1)); $('#p2-right').addEventListener('click', () => turn(-1));
   cv.addEventListener('click', (e) => {
     if (!active || moved || !ready) return; const h = hit(e.clientX, e.clientY), cur = viewD();
@@ -326,7 +329,7 @@ export function createDistricts({ cv, g, openCard, closeCard, getMouse, onExit }
 
     // everything standing on the map, far to near
     if (Math.abs(cam.th - sortedTh) > 0.02) { items.sort((a, b) => (b.u * sn + b.v * c) - (a.u * sn + a.v * c)); sortedTh = cam.th; }
-    const bucket = ((Math.round((cam.th / 6.2832) * ANG) % ANG) + ANG) % ANG, sd = viewD();
+    const bucket = ((Math.round((cam.th / 6.2832) * ANG) % ANG) + ANG) % ANG, sd = viewD(); artView = viewOf(cam.th);
     hover = mouse && !drag && !overPanel ? hit(mouse[0], mouse[1]) : null;
     const hd = hoverD >= 0 ? dist[hoverD] : hover ? (hover.board ? hover.board.d : hover.item ? hover.item.b.d : hover.lm.d) : null, focus = sd || hd;
     budget = 60;

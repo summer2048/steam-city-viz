@@ -1,6 +1,6 @@
 // 蒸汽之城 — part 1: the scroll-driven timeline. Drawing helpers live in draw.js, part 2 in districts.js.
 import { $, lerp, ramp, PAPER_C, CH, WW, WH, GAP, WIN, SS, TOP, CW, INK, L, WASH, blob, buildBlock, clamp, drawBalloon, drawCrane, eraOf, fmt, lamp, lang, makeCloud, makeHills, makePaper, makeRipples, makeSkyline, rline, rng, rpoly, setLang, smooth, tr, tree, wash } from './draw.js';
-import { createDistricts } from './districts.js?v=20261113a';
+import { createDistricts } from './districts.js?v=20261113b';
 
 // ------------------------------------------------------------ main
 async function main() {
@@ -78,6 +78,7 @@ async function main() {
   let mode = 'story';
   const districts = createDistricts({ cv, g, openCard, closeCard: () => card.classList.remove('on'), getMouse: () => mouse, onExit: () => { mode = 'story'; document.body.classList.remove('part2'); } });
   enter.addEventListener('click', async () => { card.classList.remove('on'); await districts.enter(); mode = 'districts'; document.body.classList.add('part2'); });
+  if (location.hash === '#map') setTimeout(() => enter.click()); // shortcut straight to the map, for development
   $('#gold').addEventListener('click', (e) => { goldOnly = !goldOnly; e.currentTarget.classList.toggle('on', goldOnly); e.currentTarget.textContent = goldOnly ? tr().goldOff : tr().goldOn; });
   $('#skip').addEventListener('click', () => scrollTo({ top: (document.documentElement.scrollHeight - innerHeight) * 0.97, behavior: 'instant' }));
 

@@ -3,5 +3,6 @@ __pycache__/
 data_raw/
 work/
 img_cache/
+output/
 *.zip
 node_modules/
