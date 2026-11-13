@@ -4,12 +4,18 @@
 
 把 Steam 上的 124,146 款游戏画成一座城市。数据来自 [FronkonGames/steam-games-dataset](https://huggingface.co/datasets/FronkonGames/steam-games-dataset)。
 
+![多伦多地图：市中心近景](docs/screenshots/downtown.jpg)
+
 ## 这是什么
 
 网站分两部分：
 
 1. **时间线（开场）**：向下滚动，热气球带你从 1997 年飞到 2026 年，城市一年一年盖起来。
 2. **多伦多地图（探索）**：整座城市变成一张可以转动的多伦多地图，每个街区是一种游戏类型，可以点进去找游戏。
+
+| 时间线 | 整张地图 | 一个街区 |
+| --- | --- | --- |
+| ![时间线开场](docs/screenshots/timeline.jpg) | ![整张多伦多地图](docs/screenshots/map.jpg) | ![冒险类所在的老城与东区](docs/screenshots/district.jpg) |
 
 ## 怎么读这座城市
 
@@ -54,7 +60,7 @@ macOS 和 Linux 上把 `python` 换成 `python3`。然后用桌面浏览器打�
 
 - **时间线**：滚动鼠标前进；右上角切换 EN / 中文；可以搜索一款游戏找到它的那扇窗；可以只看金色的 1%。
 - **进入地图**：滚到全景后点 “走进街区”。
-- **地图**：拖动平移，滚轮缩放，`Q` / `E` 或圆形按钮转动视角；点街区、广告牌或楼房查看里面的游戏，点游戏打开详情卡片。
+- **地图**：拖动平移，滚轮缩放，`Q` / `E` 或圆形按钮转动视角（每次转 90°，共四个朝向）；点街区、广告牌或楼房查看里面的游戏，点游戏打开详情卡片。
 
 ## 目录
 
@@ -64,13 +70,17 @@ site/            网站本体（纯静态，没有构建步骤，没有第三方
   js/city.js       第一部分：时间线
   js/districts.js  第二部分：多伦多地图
   js/toronto.js    多伦多的地理：湖岸、河、道路、地标位置、街区
-  js/models.js     建筑组件（36 个地标、13 类普通建筑）
+  js/models.js     代码绘制的建筑组件（36 个地标、13 类普通建筑），现在是后备和灰模参考
+  js/sprites.js    加载手绘素材，替换上面的组件
   js/draw.js       两部分共用的手绘函数和中英文文案
   data/            预处理好的数据
+  sprites/         地图用的手绘素材（由 scripts/artkit_sprites.py 生成）
   models.html      所有建筑组件的总览页
   wall.html        早期的封面墙版本，留作参考
 scripts/         数据处理和素材包脚本
-artkit/          手绘素材包：给 ChatGPT 的提示词和参考图
+artkit/          手绘素材包：给 ChatGPT 的提示词、参考图、接入记录
+output/          ChatGPT 画好的原图（不在仓库里，从 Releases 下载）
+docs/screenshots/  本页用的效果图
 ```
 
 ## 数据文件
@@ -119,13 +129,22 @@ python scripts/build_diorama.py data_raw/games.parquet site/data/diorama.json
 
 `fetch_thumbs.py` 会下载全部游戏封面，大约需要 6 分钟。
 
-## 手绘素材包（进行中）
+## 手绘素材包
 
-现在地图上的建筑是代码画的。计划换成 ChatGPT 生成的手绘图：每个组件一张图，图里是同一栋建筑的四个朝向。
+地图上的建筑、船和树用的是 ChatGPT 生成的手绘图：每个组件一张图，图里是同一栋建筑的四个朝向。64 个组件都已接入；没有手绘图的组件会自动退回代码绘制的版本。
 
 - 操作说明和全部提示词在 [`artkit/PROMPTS.md`](artkit/PROMPTS.md)。
 - `artkit/batch-01` 到 `batch-08` 是 64 个组件的灰模参考图，每批 8 张。
-- 把生成的图接进地图的代码还没有写。
+- ChatGPT 画好的原图放在 `output/batch-01` 到 `batch-08`，文件名是 `组件名.png`。原图共 56 MB，不在仓库里，需要时从 [Releases 下载 `artkit-output.zip`](https://github.com/summer2048/steam-city-viz/releases/download/artkit-raw-v1/artkit-output.zip)，解压到项目根目录。只运行网站不需要它，`site/sprites/` 里已经有处理好的素材。
+- 接入方式、取舍和开发记录在 [`artkit/INTEGRATION.md`](artkit/INTEGRATION.md)。
+
+换了或重画了原图之后，重新生成地图用的素材（需要 `pillow` 和 `numpy`，大约三分钟）：
+
+```bash
+python scripts/artkit_sprites.py
+```
+
+打开 <http://localhost:8765/models.html> 可以看到全部手绘素材。在地址后面加 `?noart`（例如 `http://localhost:8765/?noart#map`）可以切回代码绘制的版本做对比；`#map` 会跳过时间线直接进入地图。
 
 ## 统计口径
 

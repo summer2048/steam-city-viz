@@ -1,6 +1,13 @@
 <!doctype html><meta charset="utf-8"><title>component sheet</title>
 <body style="margin:0;background:#e9dcc0;font:12px sans-serif">
+<h2 style="margin:16px 20px 0">Painted sprites (what the map draws) · 手绘素材（地图实际使用）</h2>
+<div id="art" style="display:flex;flex-wrap:wrap;gap:10px;padding:12px 20px"></div>
+<h2 style="margin:16px 20px 0">Code-drawn models (fallback and reference geometry) · 代码绘制的模型（后备）</h2>
 <canvas id="c" width="2400" height="2100"></canvas>
+<script type="module">
+const meta = await fetch('sprites/sprites.json').then((r) => r.json()).catch(() => ({}));
+document.getElementById('art').innerHTML = Object.keys(meta).map((id) => `<figure style="margin:0"><img src="sprites/${id}.webp" loading="lazy" style="height:220px;display:block"><figcaption>${id}</figcaption></figure>`).join('') || 'no sprites built yet: run scripts/artkit_sprites.py';
+</script>
 <script type="module">
 import { LANDMARKS, generic, renderSprite, treeSprite, ANG, SS } from './js/models.js';
 const g = document.getElementById('c').getContext('2d'); g.fillStyle = '#e9dcc0'; g.fillRect(0, 0, 2400, 2100);
