@@ -49,10 +49,10 @@
 不需要安装任何东西，只要有 Python：
 
 ```bash
-python -m http.server 8765 --directory site
+python scripts/serve.py
 ```
 
-macOS 和 Linux 上把 `python` 换成 `python3`。然后用桌面浏览器打开 <http://localhost:8765>。
+macOS 和 Linux 上把 `python` 换成 `python3`。（也可以用 `python -m http.server 8765 --directory site`，但在 Windows 上它可能把 `.js` 当成 `text/plain` 发出去，浏览器会拒绝加载。）然后用桌面浏览器打开 <http://localhost:8765>。
 
 改了代码却看不到变化时，按 Ctrl+Shift+R 强制刷新。
 
